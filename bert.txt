@@ -1,4 +1,4 @@
 <<<<<<< HEAD
 This is a second file and user 2 has already edited this file which will create a conflit not that I have edited it as well
 =======
-This line has been edited in the other file as well. I will now try to fix the conflict with meld. Hopefully it will work
+The conflict was edited using none of the previous versions.
