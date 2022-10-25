@@ -1,5 +1,4 @@
 <<<<<<< HEAD
 This is a second file and user 2 has already edited this file which will create a conflit not that I have edited it as well
 =======
-This is a second file and i have edited this line to create a conflict
->>>>>>> c36249af50c3a05be63c05611428b692b08373f5
+This line has been edited in the other file as well. I will now try to fix the conflict with meld. Hopefully it will work
