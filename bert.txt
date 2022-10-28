@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-This is a second file and user 2 has already edited this file which will create a conflit not that I have edited it as well
-=======
-The conflict was edited using none of the previous versions.
-This line has been added to test the success of the gpg key set up
