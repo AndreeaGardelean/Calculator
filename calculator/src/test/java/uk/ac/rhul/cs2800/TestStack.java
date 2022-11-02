@@ -34,7 +34,7 @@ class TestStack {
   // Test 3
   @Test
   void testPush() {
-    st.push(new Entry(1.7f, Type.STRING));
+    st.push(new Entry(1.7f));
     assertEquals(st.size(), 1, "Pushing once should return stack size 1.");
   }
 
@@ -43,9 +43,9 @@ class TestStack {
   void testPushAllTypes() {
     assertEquals(st.size(), 0, "There are no entries in the stack.");
 
-    st.push(new Entry(2.67f, Type.NUMBER));
-    st.push(new Entry("Hello World", Type.STRING));
-    st.push(new Entry(Symbol.PLUS, Type.SYMBOL));
+    st.push(new Entry(2.67f));
+    st.push(new Entry("Hello World"));
+    st.push(new Entry(Symbol.PLUS));
 
     assertEquals(st.size(), 3, "Pushing 3 items should return stack size 3.");
   }
@@ -61,15 +61,15 @@ class TestStack {
   void testPopAndPush() {
     assertThrows(EmptyStackException.class, () -> st.pop(),
         "There are no items in the stack, cannot pop an empty stack!");
-    st.push(new Entry(74.38f, Type.NUMBER));
+    st.push(new Entry(74.38f));
     assertEquals(st.size(), 1, "Pushing once should give stack size 1.");
   }
 
   // Test 7
   @Test
   void testPushAndPop() throws BadTypeException {
-    st.push(new Entry("1st entry", Type.STRING));
-    st.push(new Entry(Symbol.TIMES, Type.SYMBOL));
+    st.push(new Entry("1st entry"));
+    st.push(new Entry(Symbol.TIMES));
 
     assertEquals(st.pop().getOther(), Symbol.TIMES,
         "Pushing twice and popping once should return the last item pushed.");
@@ -79,8 +79,8 @@ class TestStack {
   // Test 8
   @Test
   void testPushAndPopAll() throws BadTypeException {
-    st.push(new Entry(Symbol.INVALID, Type.SYMBOL));
-    st.push(new Entry(4.66f, Type.NUMBER));
+    st.push(new Entry(Symbol.INVALID));
+    st.push(new Entry(4.66f));
 
     assertEquals(st.pop().getValue(), 4.66f,
         "Pushing twice and popping once should return the last item pushed: 4.66.");
@@ -94,7 +94,7 @@ class TestStack {
   // Test 9
   @Test
   void testPushOncePopTwice() throws BadTypeException {
-    st.push(new Entry(Symbol.INVALID, Type.SYMBOL));
+    st.push(new Entry(Symbol.INVALID));
     assertEquals(st.size(), 1, "Pushing once should give stack size 1.");
     assertEquals(st.pop().getOther(), Symbol.INVALID,
         "Pushing once and popping once should return the pushed item.");
@@ -107,9 +107,9 @@ class TestStack {
   // Test 10
   @Test
   void testTop() throws BadTypeException {
-    st.push(new Entry("This is the 1st item", Type.STRING));
-    st.push(new Entry(Symbol.DIVIDE, Type.SYMBOL));
-    st.push(new Entry(5.987f, Type.NUMBER));
+    st.push(new Entry("This is the 1st item"));
+    st.push(new Entry(Symbol.DIVIDE));
+    st.push(new Entry(5.987f));
 
     assertTrue((st.top().getStr()).equals("This is the 1st item"),
         "Top should return the first item pushed in the stack.");
@@ -121,5 +121,4 @@ class TestStack {
     assertThrows(EmptyStackException.class, () -> st.top(),
         "An empty stack does not have a top item.");
   }
-
 }

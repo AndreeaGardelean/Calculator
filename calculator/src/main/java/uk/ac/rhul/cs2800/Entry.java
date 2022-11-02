@@ -22,9 +22,9 @@ public class Entry {
    *
    * @param val value used to initialise the float entry
    */
-  public Entry(float val, Type type) {
+  public Entry(float val) {
     this.value = val;
-    this.type = type;
+    this.type = Type.NUMBER;
   }
 
   /**
@@ -32,9 +32,9 @@ public class Entry {
    *
    * @param str value used to initialise the string entry
    */
-  public Entry(String str, Type type) {
+  public Entry(String str) {
     this.str = str;
-    this.type = type;
+    this.type = Type.STRING;
   }
 
   /**
@@ -42,9 +42,9 @@ public class Entry {
    *
    * @param symbol value used to initialise the symbol entry
    */
-  public Entry(Symbol symbol, Type type) {
+  public Entry(Symbol symbol) {
     this.other = symbol;
-    this.type = type;
+    this.type = Type.SYMBOL;
   }
 
   /**
