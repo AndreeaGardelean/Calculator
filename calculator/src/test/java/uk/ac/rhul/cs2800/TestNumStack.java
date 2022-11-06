@@ -22,75 +22,54 @@ class TestNumStack {
   // Test if the NumStack object can be instantiated
   @Test
   void test() {
-    NumStack numbers = new NumStack();
+    stackNums = new NumStack();
   }
 
   // Test 2
+  // Test if the stack is empty
   @Test
-  void testSize() {
-    assertEquals(stackNums.size(), 0, "No elements in the stack have been added.");
+  void testIsEmpty() throws EmptyStackException {
+    assertTrue(stackNums.isEmpty(), "No elements in the stack have been added.");
   }
-  
+
   // Test 3
+  // Push and check if the stack is still empty
   @Test
   void testPush() {
     stackNums.push(0.77f);
-    assertEquals(stackNums.size(), 1, "One pushed item should give stack size 1.");
+    assertFalse(stackNums.isEmpty(), "One pushed item should give a non empty stack");
   }
-  
+
   // Test 4
-  // Push multiple float entryes to the stack and check its size
+  // Push multiple float entries to the stack and check if its still empty
   @Test
   void testPushMore() {
     for (int i = 0; i < 5; i++) {
-      stackNums.push(i*1.5f);
+      stackNums.push(i * 1.5f);
     }
-    assertEquals(stackNums.size(), 5, "Pushing 5 items into the stack should return stack size 5.");
+    assertFalse(stackNums.isEmpty(), "Pushing multiple items should give a non empty stack");
   }
-  
+
   // Test 5
   @Test
   void testPop() throws BadTypeException {
     stackNums.push(0.33f);
     stackNums.push(2.890f);
-    assertEquals(stackNums.size(), 2, "Pushing twice should return stack size 2.");
-    
-    assertEquals(stackNums.pop(), 2.890f, "Pushing twice and poping once should return the last item pushed: 2.890");
-    assertEquals(stackNums.size(), 1, "Pushing twice and poping once should return stack size 1.");
+
+    assertEquals(stackNums.pop(), 2.890f,
+        "Pushing twice and poping once should return the last item pushed: 2.890");
+    assertEquals(stackNums.pop(), 0.33f,
+        "Pushing twice and poping twice should return the last item pushed: 0.33");
+    assertTrue(stackNums.isEmpty(), "Pushing and popping twice should give an empty stack");
   }
-  
-  // Test 5
-  // Test if popping an empty stack return an exception
-  // The EmptyStackException is thrown by the Stack class
+
+  // Test 6
+  // Test if popping an empty stack returns an exception
   @Test
   void testEmptyStackPop() {
-    assertThrows(EmptyStackException.class, () -> stackNums.pop(), "The stack is empty, pop not allowed.");
-  }
-  
-  // Test 6
-  // evaluate the feedback from the isEmpty() method
-  @Test
-  void testIsEmpty() {
-    assertTrue(stackNums.isEmpty(), "The stack is empty.");
-  }
-  
-  // Test 7
-  // Test if a stack with one entry is empty
-  @Test
-  void testIsEmptyNonEmpty() {
-    stackNums.push(0.0725f);
-    assertFalse(stackNums.isEmpty(), "The stack is not empty.");
+    assertThrows(EmptyStackException.class, () -> stackNums.pop(),
+        "The stack is empty, pop not allowed.");
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 
