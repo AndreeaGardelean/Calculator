@@ -44,9 +44,11 @@ public class OpStack {
    * @return the values of the last stack entry
    * @throws BadTypeException throw an exception if the entry type is different of that of
    *         getOther() return type
-   * @throws EmptyStackException throw an exception if the stack is empty
    */
-  public Symbol pop() throws BadTypeException, EmptyStackException {
+  public Symbol pop() throws BadTypeException {
+    if (isEmpty()) {
+      throw new EmptyStackException();
+    }
     return symbolStack.pop().getOther();
   }
 

@@ -41,9 +41,8 @@ public class NumStack {
    *
    * @return return the last float entry pushed into the stack
    * @throws BadTypeException throw exception if the getValue() method returns a different data type
-   * @throws EmptyStackException throw an exception if the stack is empty
    */
-  public float pop() throws BadTypeException, EmptyStackException {
+  public float pop() throws BadTypeException {
     if (isEmpty()) {
       throw new EmptyStackException();
     }
