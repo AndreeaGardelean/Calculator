@@ -8,8 +8,8 @@ package uk.ac.rhul.cs2800;
 
 public enum Symbol {
   LEFT_BRACKET('(', "left bracket"), RIGHT_BRACKET(')', "right bracket"), TIMES('*',
-      "multiplication"), DIVIDE('/',
-          "fraction"), PLUS('+', "addition"), MINUS('-', "subtraction"), INVALID('!', "invalid");
+      "multiplication"), DIVIDE('/', "fraction"), PLUS('+',
+          "addition"), MINUS('-', "subtraction"), FACTORIAL('!', "factorial");
 
   private char sign;
   private String description;
@@ -23,6 +23,15 @@ public enum Symbol {
   private Symbol(char sign, String description) {
     this.sign = sign;
     this.description = description;
+  }
+
+  /**
+   * Return the sign value of the enumerated type.
+   *
+   * @return return the character value of the enumerated type
+   */
+  public char getSign() {
+    return sign;
   }
 
   /**

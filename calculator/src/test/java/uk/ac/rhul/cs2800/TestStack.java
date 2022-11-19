@@ -79,14 +79,14 @@ class TestStack {
   // Test 8
   @Test
   void testPushAndPopAll() throws BadTypeException {
-    st.push(new Entry(Symbol.FACTORIAL));
+    st.push(new Entry(Symbol.INVALID));
     st.push(new Entry(4.66f));
 
     assertEquals(st.pop().getValue(), 4.66f,
         "Pushing twice and popping once should return the last item pushed: 4.66.");
     assertEquals(st.size(), 1, "Pushing twice an popping once should give stack size 1.");
 
-    assertEquals(st.pop().getOther(), Symbol.FACTORIAL,
+    assertEquals(st.pop().getOther(), Symbol.INVALID,
         "Pushing twice and popping twice should return the first item pushed.");
     assertEquals(st.size(), 0, "Pushing twice and popping twice should return stack size 0.");
   }
@@ -94,9 +94,9 @@ class TestStack {
   // Test 9
   @Test
   void testPushOncePopTwice() throws BadTypeException {
-    st.push(new Entry(Symbol.FACTORIAL));
+    st.push(new Entry(Symbol.INVALID));
     assertEquals(st.size(), 1, "Pushing once should give stack size 1.");
-    assertEquals(st.pop().getOther(), Symbol.FACTORIAL,
+    assertEquals(st.pop().getOther(), Symbol.INVALID,
         "Pushing once and popping once should return the pushed item.");
 
     assertEquals(st.size(), 0, "Pushing once and popping once should return stack size 0.");
