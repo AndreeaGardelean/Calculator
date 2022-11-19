@@ -57,11 +57,31 @@ public class RevPolishCalc implements Calculator {
     int operandLength = (int) Math.ceil(expressionValues.length / (double) 2);
 
     // a valid expression will have len/2 operators
-    int operatorLength = (int) expressionValues.length / 2;
+    int operatorLength = expressionValues.length - operandLength;
+    String[] operators = new String[operatorLength];
     
     // an expression is invalid if it has an even number of arguments
     if (expressionValues.length % 2 == 0) {
       throw new InvalidExpressionException();
+    }
+    
+    // check if there is a mathematical sign in the first part of the expression
+    for (int n = 0; n < operandLength; n++) {
+      if (!isDigit(expressionValues[n])) {
+        throw new InvalidExpressionException();
+      } else {
+        operands.push(Float.parseFloat(expressionValues[n]));
+      }
+    }
+    
+    // check that there are operands in the part where they are expected
+    // if not throw an exception and exit
+    for (int i = operandLength; i < expressionValues.length; i++) {
+      if (!checkSymbol(expressionValues[i])) {
+        throw new InvalidExpressionException();
+      } else {
+        operators[operandLength - i] = expressionValues[i];
+      }
     }
     
     return 2;

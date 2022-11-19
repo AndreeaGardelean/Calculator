@@ -58,7 +58,7 @@ class TestRevPolishCalc {
   void testIsNotDigit() {
     assertFalse(reversePolish.isDigit("1$8"));
   }
-  
+
   // Test 7
   // Test if exception is thrown when it contains an even number of values
   @Test
@@ -66,4 +66,24 @@ class TestRevPolishCalc {
     assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 2 3 -"));
   }
 
+  // Test 8
+  // Test if the method throws error when there is a sign other than at the end of the string
+  @Test
+  void testError2() {
+    assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 + 2"));
+  }
+
+  // Test 9
+  // Test if there is an error thrown when an invalid sign is in the expression
+  @Test
+  void testError3() {
+    assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 2 %"));
+  }
+
+  // Test 10
+  // Test if the method throws error when there are more operators than operands
+  @Test
+  void testError4() {
+    assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 + /"));
+  }
 }
