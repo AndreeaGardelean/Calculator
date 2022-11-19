@@ -1,7 +1,7 @@
 package uk.ac.rhul.cs2800;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 class TestSymbol {
@@ -30,5 +30,20 @@ class TestSymbol {
 
     symbol = Symbol.DIVIDE;
     assertTrue(symbol.toString().equals("/ is fraction sign"));
+  }
+  
+  // Test 4
+  // Test if getSign() method returns the correct value
+  @Test
+  void testGetSignMethod() {
+    symbol = Symbol.INVALID;
+    assertTrue(symbol.getSign() == '!');
+  }
+  
+  // Test 5
+  @Test
+  void testGetSignMethodFalse() {
+    symbol = Symbol.MINUS;
+    assertFalse(symbol.getSign() == '_');
   }
 }
