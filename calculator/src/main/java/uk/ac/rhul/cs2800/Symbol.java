@@ -8,8 +8,8 @@ package uk.ac.rhul.cs2800;
 
 public enum Symbol {
   LEFT_BRACKET('(', "left bracket"), RIGHT_BRACKET(')', "right bracket"), TIMES('*',
-      "multiplication"), DIVIDE('/', "fraction"), PLUS('+',
-          "addition"), MINUS('-', "subtraction"), FACTORIAL('!', "factorial");
+      "multiplication"), DIVIDE('/',
+          "fraction"), PLUS('+', "addition"), MINUS('-', "subtraction"), INVALID('!', "invalid");
 
   private char sign;
   private String description;
@@ -26,7 +26,7 @@ public enum Symbol {
   }
 
   /**
-   * Return the sign value of the enumerated type.
+   * Return the sign value of the enumerated type. 
    *
    * @return return the character value of the enumerated type
    */
