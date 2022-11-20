@@ -103,11 +103,13 @@ public class RevPolishCalc implements Calculator {
       e.printStackTrace();
     }
 
+    // format the resulting expression value to 2 decimal places
     DecimalFormat df = new DecimalFormat("#.##");
     df.setRoundingMode(RoundingMode.FLOOR);
 
+    // df.format(result) will return a string 
+    // convert from string to float
     result = Float.parseFloat(df.format(result));
-    System.out.println(result);
     return result;
   }
 }
