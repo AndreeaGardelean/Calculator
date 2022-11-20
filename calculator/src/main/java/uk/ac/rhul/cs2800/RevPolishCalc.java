@@ -1,5 +1,8 @@
 package uk.ac.rhul.cs2800;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
  * Implements Calculator interface and evaluates a Reverse Polish expression to a mathematical
  * value.
@@ -24,10 +27,8 @@ public class RevPolishCalc implements Calculator {
    */
   public boolean checkSymbol(String val) {
     char[] value = val.toCharArray();
-    return ((value[0] == Symbol.LEFT_BRACKET.getSign())
-        || (value[0] == Symbol.RIGHT_BRACKET.getSign()) || (value[0] == Symbol.MINUS.getSign())
-        || (value[0] == Symbol.PLUS.getSign()) || (value[0] == Symbol.DIVIDE.getSign())
-        || (value[0] == Symbol.TIMES.getSign()) || (value[0] == Symbol.INVALID.getSign()));
+    return ((value[0] == Symbol.MINUS.getSign()) || (value[0] == Symbol.PLUS.getSign())
+        || (value[0] == Symbol.DIVIDE.getSign()) || (value[0] == Symbol.TIMES.getSign()));
   }
 
   /**
@@ -59,31 +60,54 @@ public class RevPolishCalc implements Calculator {
     // a valid expression will have len/2 operators
     int operatorLength = expressionValues.length - operandLength;
     String[] operators = new String[operatorLength];
-    
+
     // an expression is invalid if it has an even number of arguments
     if (expressionValues.length % 2 == 0) {
       throw new InvalidExpressionException();
     }
-    
+
     // check if there is a mathematical sign in the first part of the expression
-    for (int n = 0; n < operandLength; n++) {
+    for (int n = operandLength - 1; n > -1; n--) {
       if (!isDigit(expressionValues[n])) {
         throw new InvalidExpressionException();
       } else {
         operands.push(Float.parseFloat(expressionValues[n]));
       }
     }
-    
-    // check that there are operands in the part where they are expected
+
+    // check that the operands are only at the end of the expression
     // if not throw an exception and exit
     for (int i = operandLength; i < expressionValues.length; i++) {
-      if (!checkSymbol(expressionValues[i])) {
+      if (!checkSymbol(expressionValues[i])
+          || expressionValues[i] == String.valueOf(Symbol.INVALID.getSign())) {
         throw new InvalidExpressionException();
       } else {
-        operators[operandLength - i] = expressionValues[i];
+        operators[i - operandLength] = expressionValues[i];
       }
     }
-    
-    return 2;
+
+    try {
+      result = operands.pop();
+      for (int n = 0; n < operatorLength; n++) {
+        if (operators[n].equals("+")) {
+          result += operands.pop();
+        } else if (operators[n].equals("-")) {
+          result -= operands.pop();
+        } else if (operators[n].equals("*")) {
+          result *= operands.pop();
+        } else if (operators[n].equals("/")) {
+          result = result / operands.pop();
+        }
+      }
+    } catch (BadTypeException e) {
+      e.printStackTrace();
+    }
+
+    DecimalFormat df = new DecimalFormat("#.##");
+    df.setRoundingMode(RoundingMode.FLOOR);
+
+    result = Float.parseFloat(df.format(result));
+    System.out.println(result);
+    return result;
   }
 }

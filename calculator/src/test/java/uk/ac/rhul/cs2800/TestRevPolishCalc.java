@@ -86,4 +86,32 @@ class TestRevPolishCalc {
   void testError4() {
     assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 + /"));
   }
+  
+  // Test 11
+  // Test if the method throws error when the expression contains '!' 
+  @Test
+  void testError5() {
+    assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 2 !"));
+  }
+
+  // Test 12
+  // Test a longer string expression
+  @Test
+  void testExpression2() throws InvalidExpressionException {
+    assertEquals(reversePolish.evaluate("71 10 2 + -"), 79);
+  }
+  
+  // Test 13
+  // Test a more complex string expression
+  @Test
+  void testExpressionComplex() throws InvalidExpressionException {
+    assertEquals(reversePolish.evaluate("100 3 6 / +"), (float) 39.33);
+  }
+  
+  // Test 14
+  // Test a more complex string expression
+  @Test
+  void testExpressionAllOperators() throws InvalidExpressionException {
+    assertEquals(reversePolish.evaluate("10 6 18 3 9 + * / -"), (float) 87.0);
+  }
 }
