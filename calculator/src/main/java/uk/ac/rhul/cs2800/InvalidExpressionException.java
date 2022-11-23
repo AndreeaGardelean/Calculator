@@ -16,6 +16,6 @@ public class InvalidExpressionException extends Exception {
    * Exception constructor. Prints exception message.
    */
   public InvalidExpressionException() {
-    System.err.println("Invalid mathematicalExpression");
+    System.err.println("Invalid mathematical expression");
   }
 }

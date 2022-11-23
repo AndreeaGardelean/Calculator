@@ -9,7 +9,7 @@ import java.text.DecimalFormat;
  *
  * @author zjac013
  */
-public class RevPolishCalc implements Calculator {
+public class RevPolishCalc extends CheckElement implements Calculator {
   float result;
 
   /**
@@ -17,33 +17,6 @@ public class RevPolishCalc implements Calculator {
    */
   public RevPolishCalc() {
     result = 0;
-  }
-
-  /**
-   * Check if the given string is a valid sign, which was declared in the Symbol enumerated class.
-   *
-   * @param val string value to be evaluated
-   * @return returns the evaluated
-   */
-  public boolean checkSymbol(String val) {
-    char[] value = val.toCharArray();
-    return ((value[0] == Symbol.MINUS.getSign()) || (value[0] == Symbol.PLUS.getSign())
-        || (value[0] == Symbol.DIVIDE.getSign()) || (value[0] == Symbol.TIMES.getSign()));
-  }
-
-  /**
-   * Check if the expression contains only digits.
-   *
-   * @param val string value to evaluate
-   * @return return boolean value of the evaluated expression
-   */
-  public boolean isDigit(String val) {
-    for (int i = 0; i < val.length(); i++) {
-      if (val.charAt(i) < '0' || val.charAt(i) > '9') {
-        return false;
-      }
-    }
-    return true;
   }
 
   @Override
