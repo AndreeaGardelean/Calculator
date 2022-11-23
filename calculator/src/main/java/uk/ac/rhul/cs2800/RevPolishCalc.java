@@ -52,53 +52,39 @@ public class RevPolishCalc implements Calculator {
 
     String[] expressionValues = expression.split(" ");
 
-    // a valid mathematical expression always contains an odd number of characters
-    // for example: 1 1 +, 2 5 8 - * are valid expressions and the pattern repeats
-    // a valid expression will have len/2 + 1 operands
-    int operandLength = (int) Math.ceil(expressionValues.length / (double) 2);
-
-    // a valid expression will have len/2 operators
-    int operatorLength = expressionValues.length - operandLength;
-    String[] operators = new String[operatorLength];
-
     // an expression is invalid if it has an even number of arguments
     if (expressionValues.length % 2 == 0) {
       throw new InvalidExpressionException();
     }
 
-    // check if there is a mathematical sign in the first part of the expression
-    for (int n = operandLength - 1; n > -1; n--) {
-      if (!isDigit(expressionValues[n])) {
-        throw new InvalidExpressionException();
-      } else {
+    for (int n = 0; n < expressionValues.length; n++) {
+      if (isDigit(expressionValues[n])) {
         operands.push(Float.parseFloat(expressionValues[n]));
-      }
-    }
-
-    // check that the operands are only at the end of the expression
-    // if not throw an exception and exit
-    for (int i = operandLength; i < expressionValues.length; i++) {
-      if (!checkSymbol(expressionValues[i])
-          || expressionValues[i] == String.valueOf(Symbol.INVALID.getSign())) {
+      } else if (checkSymbol(expressionValues[n])) {
+        try {
+          result = operands.pop();
+          if (operands.isEmpty()) {
+            throw new InvalidExpressionException();
+          } else if (expressionValues[n].equals("+")) {
+            result = operands.pop() + result;
+          } else if (expressionValues[n].equals("-")) {
+            result = operands.pop() - result;
+          } else if (expressionValues[n].equals("*")) {
+            result = operands.pop() * result;
+          } else if (expressionValues[n].equals("/")) {
+            result = operands.pop() / result;
+          }
+          operands.push(result);
+        } catch (BadTypeException e) {
+          e.printStackTrace();
+        }
+      } else if (!isDigit(expressionValues[n]) || !checkSymbol(expressionValues[n])) {
         throw new InvalidExpressionException();
-      } else {
-        operators[i - operandLength] = expressionValues[i];
       }
     }
 
     try {
       result = operands.pop();
-      for (int n = 0; n < operatorLength; n++) {
-        if (operators[n].equals("+")) {
-          result += operands.pop();
-        } else if (operators[n].equals("-")) {
-          result -= operands.pop();
-        } else if (operators[n].equals("*")) {
-          result *= operands.pop();
-        } else if (operators[n].equals("/")) {
-          result = result / operands.pop();
-        }
-      }
     } catch (BadTypeException e) {
       e.printStackTrace();
     }
@@ -107,7 +93,7 @@ public class RevPolishCalc implements Calculator {
     DecimalFormat df = new DecimalFormat("#.##");
     df.setRoundingMode(RoundingMode.FLOOR);
 
-    // df.format(result) will return a string 
+    // df.format(result) will return a string
     // convert from string to float
     result = Float.parseFloat(df.format(result));
     return result;
