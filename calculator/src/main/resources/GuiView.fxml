@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="view" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.6-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.rhul.cs2800.GuiView">
    <children>
       <RadioButton fx:id="reverse" layoutX="137.0" layoutY="182.0" mnemonicParsing="false" text="Reverse Polish">
@@ -26,7 +25,7 @@
             <Font name="Time Roman" size="20.0" />
          </font>
       </TextField>
-      <Button layoutX="368.0" layoutY="118.0" mnemonicParsing="false" onAction="#getExpression" text="Calculate">
+      <Button fx:id="calculate" layoutX="368.0" layoutY="118.0" mnemonicParsing="false" onAction="#getExpression" text="Calculate">
          <font>
             <Font name="Time Roman" size="20.0" />
          </font>
