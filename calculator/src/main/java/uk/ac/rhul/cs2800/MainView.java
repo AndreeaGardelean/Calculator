@@ -23,11 +23,4 @@ public class MainView extends Application {
     launch(args);
   }
 
-  @Override
-  public void start(Stage primaryStage) throws Exception {
-    Parent parent = FXMLLoader.load(getClass().getClassLoader().getResource("GuiView.fxml"));
-    Scene scene = new Scene(parent, 600, 400);
-    primaryStage.setScene(scene);
-    primaryStage.show();
-  }
 }
