@@ -1,40 +1,37 @@
 package uk.ac.rhul.cs2800;
 
-import java.util.function.Consumer;
-
 /**
- * Interface for a view.
+ * View interface which behaves as an Observable.
  *
  * @author zjac013
  */
 public interface ViewInterface {
-  
+
   /**
-   * Get the expression the user has entered.
+   * Get the user input expression.
    *
-   * @return return the user expression.
+   * @return return user input
    */
   public String getExpression();
-  
+
   /**
    * Send the evaluated expression to the GUI.
    *
-   * @param str evaluated expression string output
+   * @param str evaluated expression in a string format
    */
   public void setAnswer(String str);
-  
+
   /**
-   * Add an observer.
+   * Adds an expression observer and notifies the appropriate method to calculate the expression.
    *
-   * @param f add a runnable
+   * @param f observer to calculate the expression.
    */
-  public void addCalcObserver(Runnable f);
-  
+  public void addCalcObserver(Observer f);
+
   /**
-   * Add the type of the observer.
+   * Notify observer that a change in expression type has occurred.
    *
-   * @param l add the consumer type
+   * @param l the observer which notifies about a change in expression type
    */
-  public void addTypeObserver(Consumer<String> l);
-  
+  public void addTypeObserver(Observer l);
 }
