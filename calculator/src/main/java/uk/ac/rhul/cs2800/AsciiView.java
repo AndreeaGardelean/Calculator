@@ -16,8 +16,8 @@ public class AsciiView implements ViewInterface {
   Observer type = null;
 
   /**
-   * This is an ASCII menu, is an application menu which does not use user graphical interfacebut it
-   * still communicates with the user. Based on what key the user presses the observer will be
+   * This is an ASCII menu, is an application menu which does not use user graphical interface but
+   * it still communicates with the user. Based on what key the user presses the observer will be
    * notified.
    */
   public void menu() {
@@ -45,7 +45,7 @@ public class AsciiView implements ViewInterface {
           break;
 
         case 'Q':
-          System.out.println("ByeBye!");
+          System.out.println("Bye!");
           done = true;
           break;
 

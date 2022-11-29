@@ -2,7 +2,8 @@ package uk.ac.rhul.cs2800;
 
 /**
  * Evaluates an infix string expression. Converts the infix expression to reverse polish notation
- * and evaluates the expression to invalid or a floating point value.
+ * and evaluates the expression to invalid if the user has entered an invalid expression or a
+ * floating point value.
  *
  * @author zjac013
  */
@@ -27,7 +28,7 @@ public class StandardCalc extends CheckElement implements Calculator {
   }
 
   /**
-   * Construct which initialises the needed stacks.
+   * Constructor which initialises the needed stacks.
    */
   public StandardCalc() {
     operators = new OpStack();
@@ -38,7 +39,7 @@ public class StandardCalc extends CheckElement implements Calculator {
   @Override
   public float evaluate(String expression) throws InvalidExpressionException {
     String[] values = expression.split(" ");
-    String expressionRpn = new String("");
+    String expressionRpn = new String(" ");
 
     final float result;
 
@@ -48,6 +49,8 @@ public class StandardCalc extends CheckElement implements Calculator {
 
       } else if (checkSymbol(values[n]) || values[n].equals("(")) {
         operators.push(stringToSymbol(values[n]));
+      } else if (!(checkSymbol(values[n]) || values[n].equals("(") || values[n].equals(")"))) {
+        throw new InvalidExpressionException();
       }
     }
 

@@ -1,16 +1,16 @@
 package uk.ac.rhul.cs2800;
 
-import java.util.function.Consumer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -21,8 +21,8 @@ import javafx.stage.Stage;
  */
 public class GuiView extends Application implements ViewInterface {
 
-  private String expression;
-  private String answer;
+  private static String expression;
+  static boolean isInfix = false;
 
   @FXML
   private Button calculate;
@@ -43,43 +43,55 @@ public class GuiView extends Application implements ViewInterface {
   private Label title;
 
   @FXML
+  private ToggleGroup type;
+
+  @FXML
   private Pane view;
+
+  @FXML
+  void expressionType(ActionEvent event) {
+    isInfix = infix.isSelected();
+    System.out.println("infix notation selected:" + infix.isSelected());
+  }
 
   @FXML
   void getExpression(ActionEvent event) {
     expression = input.getText();
-    setAnswer(expression);
+    System.out.println("Got the expression from the button");
   }
-
+  
   // --------------------------------------------------------
-
   @Override
   public String getExpression() {
+    expression = input.getText();
     return expression;
   }
 
   @Override
   public void setAnswer(String str) {
-    output.setText(answer);
+    output.setText(str);
   }
 
   @Override
-  public void addCalcObserver(Runnable f) {
-    calculate.setOnAction(event -> f.notify());
+  public void addCalcObserver(Observer f) {
+    System.out.println("Calc observer");
+    calculate.setOnAction(event -> f.notifyObservers());
   }
 
   @Override
-  public void addTypeObserver(Consumer<String> l) {
-    input.setOnAction(event -> l.notify());
+  public void addTypeObserver(Observer l) {
+    System.out.println("type observer");
+    infix.setOnAction(event -> l.notifyObservers());
   }
 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    GridPane parent =
-        (GridPane) FXMLLoader.load(GuiView.class.getClassLoader().getResource("GuiView.fxml"));
-    Scene scene = new Scene(parent);
-    // get the css configuration stylesheet for design
-    scene.getStylesheets().add(getClass().getResource("GuiView.css").toExternalForm());
+
+    Parent root = FXMLLoader.load(MainView.class.getClassLoader().getResource("GuiView.fxml"));
+    Scene scene = new Scene(root, 600, 400);
+
+    // get the CSS configuration style sheet for design
+    // scene.getStylesheets().add(getClass().getResource("GuiView.css").toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.show();
   }
@@ -97,8 +109,8 @@ public class GuiView extends Application implements ViewInterface {
   }
 
   /**
-   * Starts a thread to launches the application, the graphical user interface will run on a thread
-   * instead of the main thread. The thread initialisation is only done once ech run.
+   * Starts a thread to launch the application, the graphical user interface will run on a thread
+   * instead of the main thread. The thread initialisation is only done once each run.
    *
    * @return returns the instance variable
    */
@@ -106,7 +118,6 @@ public class GuiView extends Application implements ViewInterface {
     if (instance == null) {
       new Thread(() -> Application.launch(GuiView.class)).start();
       while (instance == null) {
-        // do nothing
       }
     }
     return instance;
@@ -121,5 +132,14 @@ public class GuiView extends Application implements ViewInterface {
     calculate.setDisable(false);
     infix.setDisable(false);
     reverse.setDisable(false);
+  }
+
+  /**
+   * Return the type of the expression.
+   *
+   * @return return boolean value if the expression is infix or not
+   */
+  public static boolean getExpressionType() {
+    return isInfix;
   }
 }
