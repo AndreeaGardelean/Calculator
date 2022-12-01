@@ -6,9 +6,10 @@ package uk.ac.rhul.cs2800;
  * @author zjac013
  */
 public class CalcModel {
-  private RevPolishCalc revPolishCalc;
-  private StandardCalc standard;
-  private float result;
+  private static RevPolishCalc revPolishCalc;
+  private static StandardCalc standard;
+  Calculator currentEvaluator = revPolishCalc;
+  private float result = 0;
 
   /**
    * Constructor to initialise the answer.
@@ -16,7 +17,20 @@ public class CalcModel {
   public CalcModel() {
     revPolishCalc = new RevPolishCalc();
     standard = new StandardCalc();
-    result = 0;
+  }
+
+  /**
+   * Method evaluate the current state of the calculator. 
+   *
+   * @param infix boolean value which is the evaluation of the expression if the value is in infix
+   *        notation.
+   */
+  public void setType(boolean infix) {
+    if (infix) {
+      currentEvaluator = standard;
+    } else {
+      currentEvaluator = revPolishCalc;
+    }
   }
 
   /**
@@ -24,17 +38,12 @@ public class CalcModel {
    * in infix notation or not. Based on the boolean value the appropriate classes will be called.
    *
    * @param expression user input expression to be evaluated
-   * @param infix boolean value for the expression if is in infix notation or not
    * @return returns a floating point value of the evaluated expression
    * @throws InvalidExpressionException the classes called in this method will throw an exception if
    *         the expression contains invalid mathematical characters
    */
-  public float evaluate(String expression, boolean infix) throws InvalidExpressionException {
-    if (infix) {
-      result = standard.evaluate(expression);
-    } else if (!infix) {
-      result = revPolishCalc.evaluate(expression);
-    }
+  public float evaluate(String expression) throws InvalidExpressionException {
+    result = currentEvaluator.evaluate(expression);
     return result;
   }
 }
