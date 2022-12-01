@@ -48,18 +48,6 @@ public class GuiView extends Application implements ViewInterface {
   @FXML
   private Pane view;
 
-  @FXML
-  void expressionType(ActionEvent event) {
-    isInfix = infix.isSelected();
-    System.out.println("infix notation selected:" + infix.isSelected());
-  }
-
-  @FXML
-  void getExpression(ActionEvent event) {
-    expression = input.getText();
-    System.out.println("Got the expression from the button");
-  }
-  
   // --------------------------------------------------------
   @Override
   public String getExpression() {
@@ -74,14 +62,13 @@ public class GuiView extends Application implements ViewInterface {
 
   @Override
   public void addCalcObserver(Observer f) {
-    System.out.println("Calc observer");
     calculate.setOnAction(event -> f.notifyObservers());
   }
 
   @Override
   public void addTypeObserver(Observer l) {
-    System.out.println("type observer");
     infix.setOnAction(event -> l.notifyObservers());
+    reverse.setOnAction(event -> l.notifyObservers());
   }
 
   @Override
@@ -139,7 +126,7 @@ public class GuiView extends Application implements ViewInterface {
    *
    * @return return boolean value if the expression is infix or not
    */
-  public static boolean getExpressionType() {
-    return isInfix;
+  public boolean getExpressionType() {
+    return isInfix = infix.isSelected();
   }
 }

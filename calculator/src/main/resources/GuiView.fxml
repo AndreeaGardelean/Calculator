@@ -19,7 +19,7 @@
             <ToggleGroup fx:id="type" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="infix" layoutX="352.0" layoutY="180.0" mnemonicParsing="false" onAction="#expressionType" text="Infix" toggleGroup="$type">
+      <RadioButton fx:id="infix" layoutX="352.0" layoutY="180.0" mnemonicParsing="false" text="Infix" toggleGroup="$type">
          <font>
             <Font name="Time Roman" size="20.0" />
          </font>
@@ -29,7 +29,7 @@
             <Font name="Time Roman" size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="calculate" layoutX="368.0" layoutY="118.0" mnemonicParsing="false" onAction="#getExpression" text="Calculate">
+      <Button fx:id="calculate" layoutX="368.0" layoutY="118.0" mnemonicParsing="false" text="Calculate">
          <font>
             <Font name="Time Roman" size="20.0" />
          </font>
