@@ -39,7 +39,7 @@ public class StandardCalc extends CheckElement implements Calculator {
   @Override
   public float evaluate(String expression) throws InvalidExpressionException {
     String[] values = expression.split(" ");
-    String expressionRpn = new String(" ");
+    String expressionRpn = new String("");
 
     final float result;
 

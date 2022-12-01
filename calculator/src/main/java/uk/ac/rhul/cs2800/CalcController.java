@@ -14,7 +14,8 @@ public class CalcController {
    * Is notified when a change in the expression type is indicated.
    */
   public void expressionType() {
-    isInfix = GuiView.getExpressionType();
+    isInfix = view.getExpressionType();
+    model.setType(isInfix);
   }
 
   /**
@@ -25,7 +26,7 @@ public class CalcController {
     String expression = view.getExpression();
     float result = 0;
     try {
-      result = model.evaluate(expression, isInfix);
+      result = model.evaluate(expression);
     } catch (InvalidExpressionException e) {
       e.printStackTrace();
     }
