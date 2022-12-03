@@ -1,0 +1,8 @@
+Release notes - 03/12/2022
+Version: v-1.2
+
+New:
+ -> error message displayed when user enters an incorrect mathematical expression
+ -> error message disappears after a correct expression has been entered 
+
+ 

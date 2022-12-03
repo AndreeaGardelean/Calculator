@@ -26,13 +26,15 @@ public class CalcController {
     String expression = view.getExpression();
     float result = 0;
     try {
+      view.setErrorMessage("");
       result = model.evaluate(expression);
     } catch (InvalidExpressionException e) {
-      e.printStackTrace();
+      String msg = "Invalid mathematical expression." + System.lineSeparator()
+          + "Please refer back to the informations section.";
+      view.setErrorMessage(msg);
     }
     view.setAnswer(String.valueOf(result));
   }
-
 
   CalcController(CalcModel model, GuiView view) throws InvalidExpressionException {
     this.model = model;
@@ -41,5 +43,4 @@ public class CalcController {
     view.addCalcObserver(this::calculate);
     view.addTypeObserver(this::expressionType);
   }
-
 }

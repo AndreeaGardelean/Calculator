@@ -40,7 +40,7 @@ public class GuiView extends Application implements ViewInterface {
   private RadioButton reverse;
 
   @FXML
-  private Label title;
+  private Label errorMsg;
 
   @FXML
   private ToggleGroup type;
@@ -78,12 +78,12 @@ public class GuiView extends Application implements ViewInterface {
     Scene scene = new Scene(root, 600, 400);
 
     // get the CSS configuration style sheet for design
-    // scene.getStylesheets().add(getClass().getResource("GuiView.css").toExternalForm());
+    scene.getStylesheets()
+        .add(getClass().getClassLoader().getResource("GuiView.css").toExternalForm());
     primaryStage.setScene(scene);
     primaryStage.show();
   }
   // --------------------------------------------------------
-
   /*
    * The code between these delimiters has been written by Prof. David Cohen.
    */
@@ -128,5 +128,12 @@ public class GuiView extends Application implements ViewInterface {
    */
   public boolean getExpressionType() {
     return isInfix = infix.isSelected();
+  }
+
+  /**
+   * Set an error message in the Label box.
+   */
+  public void setErrorMessage(String error) {
+    errorMsg.setText(error);
   }
 }
