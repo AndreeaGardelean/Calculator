@@ -5,82 +5,98 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TestStandardCalc {
-  StandardCalc stdExpr;
+
+  StandardCalc stdCalc;
 
   @BeforeEach
   void setup() {
-    stdExpr = new StandardCalc();
+    stdCalc = new StandardCalc();
   }
 
   // Test 1
   // Test constructor
   @Test
   void test() {
-    stdExpr = new StandardCalc();
+    stdCalc = new StandardCalc();
   }
 
   // Test 2
-  // Test a basic expression
+  // Test a simple expression
   @Test
-  void testSimpleExpression() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("1 + 1"), 2);
+  void test2() throws InvalidExpressionException {
+    assertEquals(stdCalc.evaluate("1 + 1"), 2, "The mathematical expression '1 + 1' evaluate to 2");
   }
 
   // Test 3
-  // Test if the conversion is successful
   @Test
-  void testSymbol() {
-    assertEquals(stdExpr.stringToSymbol("*"), Symbol.TIMES);
+  void test3() throws InvalidExpressionException {
+    assertEquals(stdCalc.evaluate("1 + 3 - 6"), -2);
   }
 
+  // ---------------------------------------------------------------------------
   // Test 4
-  // Test the conversion with an invalid symbol
+  // Test if a string character is successfully converted to a symbol
+  // Set of full sets to test all possible inputs for method strToSymbol()
   @Test
-  void testSymbolInvalid() {
-    assertEquals(stdExpr.stringToSymbol("^"), Symbol.INVALID);
+  void testStrToSymbol1() {
+    assertEquals(stdCalc.strToSymbol("*"), Symbol.TIMES);
   }
 
   // Test 5
-  // Set of tests with different expressions, only 2 operands
   @Test
-  void testSimpleExpression2() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("13 - 1"), 12);
+  void testStrToSymbol2() {
+    assertEquals(stdCalc.strToSymbol("/"), Symbol.DIVIDE);
   }
 
   // Test 6
   @Test
-  void testSimpleExpression3() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("7 / 4"), (float) 1.75);
+  void testStrToSymbol3() {
+    assertEquals(stdCalc.strToSymbol("-"), Symbol.MINUS);
   }
 
   // Test 7
   @Test
-  void testSimpleExpression4() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("9 * 7"), 63);
+  void testStrToSymbol4() {
+    assertEquals(stdCalc.strToSymbol("+"), Symbol.PLUS);
   }
 
   // Test 8
-  // Set of tests with multiple operands and operators
   @Test
-  void testExpression1() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("1 + 3 - 6"), -2);
+  void testStrToSymbol5() {
+    assertEquals(stdCalc.strToSymbol("^"), Symbol.INVALID);
   }
 
-  // Test 9
+  // Test 8
   @Test
-  void testExpression2() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("7 / 2 * 6"), (float) 0.58);
+  void testStrToSymbol6() {
+    assertEquals(stdCalc.strToSymbol("*-"), Symbol.INVALID);
+  }
+  // ---------------------------------------------------------------------------
+  
+  // Test 9
+  // Expression with all possible operands
+  @Test
+  void testExprAllOperands() throws InvalidExpressionException {
+    assertEquals(stdCalc.evaluate("1 + 2 - 8 * 3 / 9"), (float) 0.33);
   }
 
   // Test 10
+  // Expression with parenthesis
   @Test
-  void testExpression3() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("89 - 5 / 3"), (float) 87.33);
+  void testExprParanthesis() throws InvalidExpressionException {
+    assertEquals(stdCalc.evaluate("( 1 + 2 ) * 4"), (float) 12);
   }
 
   // Test 11
   @Test
-  void testExpression4() throws InvalidExpressionException {
-    assertEquals(stdExpr.evaluate("8 - 5 / 3 * 5 + 9"), (float) 7.88);
+  void testExprParanthesis2() throws InvalidExpressionException {
+    assertEquals(stdCalc.evaluate("4 * ( 1 + 2 )"), (float) 12);
   }
+
+  // Test 12
+  @Test
+  void testExprParanthesis3() throws InvalidExpressionException {
+    assertEquals(stdCalc.evaluate("4 * ( 1 + 2 ) + 9 - ( 3 + 2 )"), (float) 28);
+  }
+
 }

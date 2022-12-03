@@ -24,6 +24,7 @@ class TestCalcModel {
   // Test an infix expression
   @Test
   void testInfixExpression() throws InvalidExpressionException {
+    model.setType(true);
     assertEquals(model.evaluate("1 + 2"), (float) 3);
   }
 
@@ -31,6 +32,7 @@ class TestCalcModel {
   // Test a reverse polish notation expression
   @Test
   void testRevPolishExpression() throws InvalidExpressionException {
+    model.setType(false);
     assertEquals(model.evaluate("1 5 -"), (float) -4);
   }
 
@@ -38,6 +40,7 @@ class TestCalcModel {
   // Test an more complex infix expression
   @Test
   void testInfixExpression2() throws InvalidExpressionException {
+    model.setType(true);
     assertEquals(model.evaluate("1 + 2 * 7 - 3"), (float) 9);
   }
 
@@ -45,6 +48,7 @@ class TestCalcModel {
   // Test an invalid infix expression
   @Test
   void testInfixExpressionInvalid() throws InvalidExpressionException {
+    model.setType(true);
     assertThrows(InvalidExpressionException.class, () -> model.evaluate("1 + 2 * 7 ^ 3"));
   }
   
@@ -52,6 +56,7 @@ class TestCalcModel {
   // Test a more complex infix expression
   @Test
   void testRevPolishExpression2() throws InvalidExpressionException {
+    model.setType(false);
     assertEquals(model.evaluate("1 2 + 7 3 * -"), (float) -18);
   }
   
@@ -59,6 +64,7 @@ class TestCalcModel {
   // Test a more complex infix expression
   @Test
   void testREvPolishExpression3() throws InvalidExpressionException {
+    model.setType(false);
     assertEquals(model.evaluate("6 2 9 7 + - *"), (float) -84);
   }
   
@@ -66,6 +72,7 @@ class TestCalcModel {
   // Test an invalid reverse polish notation expression
   @Test
   void testRevPolishExpressionInvalid() throws InvalidExpressionException {
+    model.setType(false);
     assertThrows(InvalidExpressionException.class, () -> model.evaluate("3 7 8 + ^"));
   }
 }
