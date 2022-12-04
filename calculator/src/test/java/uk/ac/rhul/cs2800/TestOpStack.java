@@ -11,20 +11,22 @@ class TestOpStack {
 
   OpStack symbolStack;
 
+  // Instantiate the object before each test run
+  // This will create a clean object for each test
   @BeforeEach
   void setup() {
     symbolStack = new OpStack();
   }
 
   // Test 1
-  // Test if the object can be initialised
+  // Test if the object can be instantiated
   @Test
   void test() {
     symbolStack = new OpStack();
   }
 
   // Test 2
-  // Test if the symbol can be pushed on to the stack
+  // Test if a symbol can be pushed onto the stack
   @Test
   void testPush() {
     symbolStack.push(Symbol.PLUS);
@@ -38,7 +40,7 @@ class TestOpStack {
   }
   
   // Test 4
-  // Test if the pop method return the last item from the stack and its size is updated
+  // Test if the pop method returns the last item from the stack and its size is updated
   @Test
   void testPop() throws BadTypeException, EmptyStackException {
     symbolStack.push(Symbol.DIVIDE);

@@ -3,7 +3,7 @@ package uk.ac.rhul.cs2800;
 import java.util.EmptyStackException;
 
 /**
- * Creating a stack for symbol entries.
+ * Creating a Stack of Symbol entries.
  *
  * @author zjac013
  */
@@ -12,7 +12,7 @@ public class OpStack {
   private Stack symbolStack;
 
   /**
-   * Constructor to initialise the stack of symbol entries.
+   * Constructor to initialise the Stack of Symbol entries.
    */
   public OpStack() {
     symbolStack = new Stack();
@@ -34,7 +34,7 @@ public class OpStack {
    * @throws EmptyStackException throw exception if the symbol stack is empty
    */
   public boolean isEmpty() throws EmptyStackException {
-    return (symbolStack.size == 0);
+    return (symbolStack.size() == 0);
 
   }
 

@@ -3,7 +3,7 @@ package uk.ac.rhul.cs2800;
 import java.util.EmptyStackException;
 
 /**
- * NumStack created a stack for numeric values.
+ * NumStack is a facade which creates a Stack of float Entry values.
  *
  * @author zjac013
  */
@@ -12,14 +12,14 @@ public class NumStack {
   private Stack numStack;
 
   /**
-   * Constructor to initialise the numStack variable.
+   * Constructor to initialise the NumStack Stack.
    */
   public NumStack() {
     numStack = new Stack();
   }
-  
+
   /**
-   * Check is the stack is empty and return a boolean value.
+   * Check is the stack is empty and return a boolean value describing its state.
    *
    * @return return the result of the boolean expression
    */
@@ -28,7 +28,7 @@ public class NumStack {
   }
 
   /**
-   * Push a new float Entry into the stack and update the stack size.
+   * Push a new float Entry onto the stack and update the stack size.
    *
    * @param f float value for a new stack entry
    */
@@ -39,7 +39,7 @@ public class NumStack {
   /**
    * Remove and return the last item pushed onto the stack.
    *
-   * @return return the last float entry pushed into the stack
+   * @return return the last float entry pushed onto the stack
    * @throws BadTypeException throw exception if the getValue() method returns a different data type
    */
   public float pop() throws BadTypeException {

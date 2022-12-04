@@ -3,7 +3,7 @@ package uk.ac.rhul.cs2800;
 import java.util.EmptyStackException;
 
 /**
- * Create a stack for string entries.
+ * Create a Stack for String entries.
  *
  * @author zjac013
  *
@@ -12,7 +12,7 @@ public class StrStack {
   private Stack stringStack;
 
   /**
-   * Constructor to initialise the stack.
+   * Constructor to initialise the Stack.
    */
   public StrStack() {
     stringStack = new Stack();

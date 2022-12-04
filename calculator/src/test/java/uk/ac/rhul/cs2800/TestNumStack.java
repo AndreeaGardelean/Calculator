@@ -12,7 +12,7 @@ class TestNumStack {
 
   NumStack stackNums;
 
-  // create an object before each test
+  // instantiate the object before each test
   @BeforeEach
   void setup() {
     stackNums = new NumStack();
@@ -41,7 +41,7 @@ class TestNumStack {
   }
 
   // Test 4
-  // Push multiple float entries to the stack and check if its still empty
+  // Push multiple float entries to the stack and check if it is empty
   @Test
   void testPushMore() {
     for (int i = 0; i < 5; i++) {
@@ -51,6 +51,7 @@ class TestNumStack {
   }
 
   // Test 5
+  // Push and pop twice and check is stack is empty
   @Test
   void testPop() throws BadTypeException {
     stackNums.push(0.33f);
@@ -68,8 +69,6 @@ class TestNumStack {
   @Test
   void testEmptyStackPop() {
     assertThrows(EmptyStackException.class, () -> stackNums.pop(),
-        "The stack is empty, pop not allowed.");
+        "The stack is empty, pop() not allowed.");
   }
 }
-
-
