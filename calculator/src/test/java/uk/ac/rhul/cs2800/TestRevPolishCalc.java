@@ -36,7 +36,7 @@ class TestRevPolishCalc {
   }
 
   // Test 4
-  // Test if the method throws error when there is a sign other than at the end of the string
+  // Test if the method throws error when the expression is infix notation
   @Test
   void testError2() {
     assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 + 2"));
@@ -107,5 +107,11 @@ class TestRevPolishCalc {
   @Test
   void test11() throws InvalidExpressionException {
     assertEquals(reversePolish.evaluate("1 3 2 * -"), (float) -5);
+  }
+  
+  // Test 15
+  @Test
+  void test12() throws InvalidExpressionException {
+    assertThrows(InvalidExpressionException.class, () -> reversePolish.evaluate("1 a ^"));
   }
 }

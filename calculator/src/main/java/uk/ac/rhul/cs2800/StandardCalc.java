@@ -6,17 +6,19 @@ package uk.ac.rhul.cs2800;
  *
  * @author zjac013
  */
-public class StandardCalc extends CheckElement implements Calculator {
+public class StandardCalc implements Calculator {
 
-  OpStack values;
-  RevPolishCalc rpCalc;
+  private OpStack values;
+  private RevPolishCalc rpCalc;
+  private CheckElement checkElem;
 
   /**
-   * Constructor which initialises the operand stack and the reverse polish calculator.
+   * Constructor to instantiates the needed objects.
    */
   StandardCalc() {
     values = new OpStack();
     rpCalc = new RevPolishCalc();
+    checkElem = new CheckElement();
   }
 
   @Override
@@ -24,18 +26,16 @@ public class StandardCalc extends CheckElement implements Calculator {
     String[] vals = expression.split(" ");
     String rpExpr = "";
 
-    if (isDigit(vals[0]) && isDigit(vals[1])) {
-      throw new InvalidExpressionException();
-    }
-
     for (int i = 0; i < vals.length; i++) {
-      if (!(checkSymbol(vals[i]) || isDigit(vals[i]) || vals[i].equals("(")
+      if (!(checkElem.checkSymbol(vals[i]) || checkElem.isDigit(vals[i]) || vals[i].equals("(")
           || vals[i].equals(")"))) {
-        System.out.println("Not a symbol or a digit");
+        throw new InvalidExpressionException();
+      }
+      if (i > 0 && checkElem.isDigit(vals[i - 1]) && checkElem.isDigit(vals[i])) {
         throw new InvalidExpressionException();
       }
 
-      if (checkSymbol(vals[i]) || vals[i].equals("(")) {
+      if (checkElem.checkSymbol(vals[i]) || vals[i].equals("(")) {
         values.push(strToSymbol(vals[i]));
       }
 
@@ -48,12 +48,11 @@ public class StandardCalc extends CheckElement implements Calculator {
             }
             rpExpr += s.getSign() + " ";
           }
-          // values.pop();
         } catch (BadTypeException e) {
           e.printStackTrace();
         }
       }
-      if (isDigit(vals[i])) {
+      if (checkElem.isDigit(vals[i])) {
         rpExpr += vals[i] + " ";
       }
     }
@@ -65,19 +64,15 @@ public class StandardCalc extends CheckElement implements Calculator {
         e.printStackTrace();
       }
     }
-    System.out.println(rpExpr);
     return rpCalc.evaluate(rpExpr);
-
   }
 
-
-
   /**
-   * Method which checks if a given value is one of the valid mathematical operands defined in the
+   * Method checks if a given value is one of the valid mathematical operands defined in the
    * enumerated class.
    *
    * @param val mathematical operand to be evaluated
-   * @return return the Symbol value of the input operand
+   * @return return the Symbol value equivalent to the input value
    */
   public Symbol strToSymbol(String val) {
     Symbol symbol = Symbol.INVALID;
@@ -86,22 +81,22 @@ public class StandardCalc extends CheckElement implements Calculator {
       return symbol;
     }
     if (val.equals("*")) {
-      symbol = Symbol.TIMES;
+      return Symbol.TIMES;
     }
     if (val.equals("/")) {
-      symbol = Symbol.DIVIDE;
+      return Symbol.DIVIDE;
     }
     if (val.equals("-")) {
-      symbol = Symbol.MINUS;
+      return Symbol.MINUS;
     }
     if (val.equals("+")) {
-      symbol = Symbol.PLUS;
+      return Symbol.PLUS;
     }
     if (val.equals("(")) {
-      symbol = Symbol.RIGHT_BRACKET;
+      return Symbol.RIGHT_BRACKET;
     }
     if (val.equals(")")) {
-      symbol = Symbol.LEFT_BRACKET;
+      return Symbol.LEFT_BRACKET;
     }
     return symbol;
   }
