@@ -1,7 +1,7 @@
 package uk.ac.rhul.cs2800;
 
 /**
- * List of type values an entry can represent.
+ * List of type values an expression can contain.
  *
  * @author zjac013
  */
@@ -11,18 +11,18 @@ public enum Type {
   private String description;
 
   /**
-   * Private constructor for an enum.
+   * Private constructor for an enumeration class.
    *
-   * @param description value of the enum
+   * @param description value of the enumeration object
    */
   private Type(String description) {
     this.description = description;
   }
 
   /**
-   * Method returns a string representation of an enum description.
+   * Method returns a string representation of an enumeration object description.
    *
-   * @return return a string representation of an enum
+   * @return return a string representation of an enumeration object
    */
   public String toString() {
     return this.description + " data type";

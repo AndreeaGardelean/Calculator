@@ -1,7 +1,7 @@
 package uk.ac.rhul.cs2800;
 
 /**
- * List of non-number possible symbols in a mathematical expression.
+ * List of possible operators in a mathematical expression.
  *
  * @author zjac013
  */
@@ -15,7 +15,7 @@ public enum Symbol {
   private String description;
 
   /**
-   * Single constructor for enum value.
+   * Single constructor for enumeration value.
    *
    * @param sign the sign character an expression can contain
    * @param desc the description of the expression character
@@ -35,9 +35,9 @@ public enum Symbol {
   }
 
   /**
-   * Returns a string representation of the enum attribute fields.
+   * Returns a string representation of the enumeration attribute fields.
    *
-   * @return a String representation of the enum attributes
+   * @return a String representation of the enumeration object attributes
    */
   @Override
   public String toString() {

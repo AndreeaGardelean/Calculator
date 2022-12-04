@@ -4,17 +4,16 @@ import java.util.ArrayList;
 import java.util.EmptyStackException;
 
 /**
- * The Stack class creates an array stack and implements methods which can be performed on the array
- * stack. The Stack class also represents last-in-first-out (LIFO) stack of objects. The methods
- * push, pop, top, and size are implemented, which can be used to perform certain operations on the
- * array stack.
+ * The Stack class creates an array stack of type Entry. The Stack class also represents
+ * last-in-first-out (LIFO) stack of objects. The methods push, pop, top, and size are implemented,
+ * which can be used to perform certain operations on the array stack.
  *
  * @author zjac013
  */
 public class Stack {
 
-  ArrayList<Entry> stack;
-  int size;
+  private ArrayList<Entry> stack;
+  private int size;
 
   /**
    * Create an empty array stack of type Entry.
@@ -33,7 +32,7 @@ public class Stack {
   }
 
   /**
-   * Add an Entry at the end of the stack and update the stack size variable.
+   * Add an Entry at the end of the stack and update the stack size.
    *
    * @param i the Entry to be appended to the array stack
    */

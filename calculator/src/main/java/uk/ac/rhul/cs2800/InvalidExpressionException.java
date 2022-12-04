@@ -1,12 +1,12 @@
 package uk.ac.rhul.cs2800;
 
 /**
- * Exception for an invalid mathematical expression.
+ * Exception thrown in the case when an invalid mathematical expression has been entered.
  *
  * @author zjac013
  */
 public class InvalidExpressionException extends Exception {
-  
+
   /**
    * Generated value identifier used to serialise/deserialise the exception.
    */

@@ -7,10 +7,12 @@ package uk.ac.rhul.cs2800;
  *
  */
 
-// @SuppressWarnings("serial") will ignore the warning given by the BadTypeException class regarding
-// the serial version ID
-@SuppressWarnings("serial")
 public class BadTypeException extends Exception {
+
+  /**
+   * Generated value identifier used to serialise/deserialise the exception.
+   */
+  private static final long serialVersionUID = 902259016746188985L;
 
   /**
    * Constructor for the exception. The constructor prints a message when the exception is thrown.
