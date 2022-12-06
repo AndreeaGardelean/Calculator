@@ -5,13 +5,15 @@ package uk.ac.rhul.cs2800;
  *
  * @author zjac013
  */
+
 public class CalcController {
   private CalcModel model;
   private GuiView view;
   private boolean isInfix;
 
   /**
-   * Is notified when a change in the expression type is indicated.
+   * Is notified when a change in the expression type is indicated and updates the state of the
+   * calculator.
    */
   public void expressionType() {
     isInfix = view.getExpressionType();
@@ -19,7 +21,9 @@ public class CalcController {
   }
 
   /**
-   * Send a notification when a calculation is required.
+   * When the 'Calculate' button is pressed, a notification is sent to the controller to execute
+   * this method. The method evaluates the input expression and sends an error message to the
+   * interface if an error occurs or sends the result of the evaluated expression to the view.
    */
   public void calculate() {
     expressionType();
@@ -36,9 +40,17 @@ public class CalcController {
     view.setAnswer(String.valueOf(result));
   }
 
-  CalcController(CalcModel model, GuiView view) throws InvalidExpressionException {
+  /**
+   * Constructor adds itself as an observer and calls the appropriate methods when a change occurs
+   * in the view.
+   *
+   * @param model model object to be used in the observer
+   * @param view2 graphical user interface objects on which the changes will be observed
+   * @throws InvalidExpressionException method is thrown by the model
+   */
+  CalcController(CalcModel model, GuiView view2) throws InvalidExpressionException {
     this.model = model;
-    this.view = view;
+    this.view = view2;
 
     view.addCalcObserver(this::calculate);
     view.addTypeObserver(this::expressionType);

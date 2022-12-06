@@ -1,7 +1,6 @@
 package uk.ac.rhul.cs2800;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,14 +14,14 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * Controller for the scene.
+ * Graphical user interface View which allows users to interact with the system.
  *
  * @author zjac013
  */
 public class GuiView extends Application implements ViewInterface {
 
   private static String expression;
-  static boolean isInfix = false;
+  public static boolean isInfix = false;
 
   @FXML
   private Button calculate;
@@ -56,19 +55,19 @@ public class GuiView extends Application implements ViewInterface {
   }
 
   @Override
-  public void setAnswer(String str) {
-    output.setText(str);
+  public void setAnswer(String ans) {
+    output.setText(ans);
   }
 
   @Override
-  public void addCalcObserver(Observer f) {
-    calculate.setOnAction(event -> f.notifyObservers());
+  public void addCalcObserver(Observer c) {
+    calculate.setOnAction(event -> c.notifyObservers());
   }
 
   @Override
-  public void addTypeObserver(Observer l) {
-    infix.setOnAction(event -> l.notifyObservers());
-    reverse.setOnAction(event -> l.notifyObservers());
+  public void addTypeObserver(Observer t) {
+    infix.setOnAction(event -> t.notifyObservers());
+    reverse.setOnAction(event -> t.notifyObservers());
   }
 
   @Override
@@ -83,11 +82,41 @@ public class GuiView extends Application implements ViewInterface {
     primaryStage.setScene(scene);
     primaryStage.show();
   }
+
+  /**
+   * The user interface will be started only after the controller is ready to run. If the controller
+   * is not ready all buttons are disabled.
+   */
+  @Override
+  public void menu() {
+    calculate.setDisable(false);
+    infix.setDisable(false);
+    reverse.setDisable(false);
+  }
+
+  /**
+   * Return the type of the expression by getting the boolean value which describes if the infix
+   * button has been pressed.
+   *
+   * @return return boolean value if the expression is infix or not
+   */
+  public boolean getExpressionType() {
+    return isInfix = infix.isSelected();
+  }
+
+  /**
+   * Set an error message in the Label box.
+   */
+  public void setErrorMessage(String error) {
+    errorMsg.setText(error);
+  }
+
   // --------------------------------------------------------
   /*
-   * The code between these delimiters has been written by Prof. David Cohen.
+   * The code between these delimiters has been inspired after the code written by Prof. Dave Cohen.
+   * The code can be found at:
+   * https://moodle.royalholloway.ac.uk/course/view.php?id=1470&sectionid=141860 file MVCJavaFX
    */
-
   private static volatile GuiView instance = null;
 
   @FXML
@@ -109,31 +138,5 @@ public class GuiView extends Application implements ViewInterface {
     }
     return instance;
   }
-
   // --------------------------------------------------------
-
-  /**
-   * The user interface will be started only after the controller is ready to run.
-   */
-  public void menu() {
-    calculate.setDisable(false);
-    infix.setDisable(false);
-    reverse.setDisable(false);
-  }
-
-  /**
-   * Return the type of the expression.
-   *
-   * @return return boolean value if the expression is infix or not
-   */
-  public boolean getExpressionType() {
-    return isInfix = infix.isSelected();
-  }
-
-  /**
-   * Set an error message in the Label box.
-   */
-  public void setErrorMessage(String error) {
-    errorMsg.setText(error);
-  }
 }
