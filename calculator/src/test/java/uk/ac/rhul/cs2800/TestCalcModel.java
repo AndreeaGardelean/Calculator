@@ -51,7 +51,7 @@ class TestCalcModel {
     model.setType(true);
     assertThrows(InvalidExpressionException.class, () -> model.evaluate("1 + 2 * 7 ^ 3"));
   }
-  
+
   // Test 6
   // Test a more complex infix expression
   @Test
@@ -59,7 +59,7 @@ class TestCalcModel {
     model.setType(false);
     assertEquals(model.evaluate("1 2 + 7 3 * -"), (float) -18);
   }
-  
+
   // Test 7
   // Test a more complex infix expression
   @Test
@@ -67,12 +67,30 @@ class TestCalcModel {
     model.setType(false);
     assertEquals(model.evaluate("6 2 9 7 + - *"), (float) -84);
   }
-  
+
   // Test 8
   // Test an invalid reverse polish notation expression
   @Test
   void testRevPolishExpressionInvalid() throws InvalidExpressionException {
     model.setType(false);
     assertThrows(InvalidExpressionException.class, () -> model.evaluate("3 7 8 + ^"));
+  }
+
+  // Test 9
+  // Test if the expression will be evaluated if the state of the calculator does not match the
+  // expression type
+  @Test
+  void testRevPolishExpressionInvalid2() throws InvalidExpressionException {
+    model.setType(false);
+    assertThrows(InvalidExpressionException.class, () -> model.evaluate("3 + 2 - 8"));
+  }
+  
+  // Test 10
+  // Test if the expression will be evaluated if the state of the calculator does not match the
+  // expression type
+  @Test
+  void testRevPolishExpressionInvalid3() throws InvalidExpressionException {
+    model.setType(true);
+    assertThrows(InvalidExpressionException.class, () -> model.evaluate("3 2 7 - +"));
   }
 }

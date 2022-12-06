@@ -1,29 +1,30 @@
 package uk.ac.rhul.cs2800;
 
 /**
- * Shows the expression result of each of the calculator values.
+ * Evaluates the user mathematical string expression, sets the state of the calculator and evaluates
+ * the expression based on calculator state.
  *
  * @author zjac013
  */
 public class CalcModel {
   private static RevPolishCalc revPolishCalc;
   private static StandardCalc standard;
-  Calculator currentEvaluator = revPolishCalc;
+  public Calculator currentEvaluator;
   private float result = 0;
 
   /**
-   * Constructor to initialise the answer.
+   * Constructor to initialise the needed objects.
    */
   public CalcModel() {
     revPolishCalc = new RevPolishCalc();
     standard = new StandardCalc();
+    currentEvaluator = revPolishCalc;
   }
 
   /**
-   * Method evaluate the current state of the calculator. 
+   * Set the current state of the calculator, the state is set by the Observer.
    *
-   * @param infix boolean value which is the evaluation of the expression if the value is in infix
-   *        notation.
+   * @param infix boolean value representing the sate of the calculator
    */
   public void setType(boolean infix) {
     if (infix) {
@@ -34,8 +35,8 @@ public class CalcModel {
   }
 
   /**
-   * The methods accepts an expression to be evaluated and a boolean value which indicated wether is
-   * in infix notation or not. Based on the boolean value the appropriate classes will be called.
+   * Evaluate the mathematical expression by calling the method of the current calculator state. The
+   * appropriate calculator is called based on the currentEvaluator value.
    *
    * @param expression user input expression to be evaluated
    * @return returns a floating point value of the evaluated expression
