@@ -21,7 +21,7 @@ public class MainView {
     if (System.console() == null) {
       view = GuiView.getInstance();
     }
-    new CalcController(model, view);
+    CalcController.getInstance(model, view);
     view.menu();
   }
 }

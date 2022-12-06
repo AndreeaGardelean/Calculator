@@ -20,5 +20,4 @@ public class BadTypeException extends Exception {
   public BadTypeException() {
     System.err.println("The Entry data type different from that of getter data type: ");
   }
-
 }

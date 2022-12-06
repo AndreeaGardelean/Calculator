@@ -62,7 +62,7 @@ public class RevPolishCalc implements Calculator {
 
   @Override
   public float evaluate(String expression) throws InvalidExpressionException {
-    String[] expressionValues = expression.split(" ");
+    String[] expressionValues = expression.split("\\s+");
 
     // an expression is invalid if it has an even number values
     if (expressionValues.length % 2 == 0) {

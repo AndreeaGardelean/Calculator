@@ -10,6 +10,22 @@ public class CalcController {
   private CalcModel model;
   private GuiView view;
   private boolean isInfix;
+  private static CalcController calc_instance = null;
+
+  /**
+   * A single point of access for the controller. The controller cannot be instantiated outside this
+   * class.
+   *
+   * @return returns the instance of the controller
+   * @throws InvalidExpressionException exception thrown by the model
+   */
+  public static CalcController getInstance(CalcModel model, GuiView view2)
+      throws InvalidExpressionException {
+    if (calc_instance == null) {
+      calc_instance = new CalcController(model, view2);
+    }
+    return calc_instance;
+  }
 
   /**
    * Is notified when a change in the expression type is indicated and updates the state of the
@@ -34,7 +50,7 @@ public class CalcController {
       result = model.evaluate(expression);
     } catch (InvalidExpressionException e) {
       String msg = "Invalid mathematical expression." + System.lineSeparator()
-          + "Please refer back to the informations section.";
+          + "Make sure each value in your expression is space separated";
       view.setErrorMessage(msg);
     }
     view.setAnswer(String.valueOf(result));
@@ -48,7 +64,7 @@ public class CalcController {
    * @param view2 graphical user interface objects on which the changes will be observed
    * @throws InvalidExpressionException method is thrown by the model
    */
-  CalcController(CalcModel model, GuiView view2) throws InvalidExpressionException {
+  private CalcController(CalcModel model, GuiView view2) throws InvalidExpressionException {
     this.model = model;
     this.view = view2;
 
