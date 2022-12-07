@@ -39,6 +39,9 @@ public class RevPolishCalc implements Calculator {
     } else if (operator.equals("*")) {
       val = (operand * result);
     } else if (operator.equals("/")) {
+      if (result == 0) {
+        throw new ArithmeticException();
+      }
       val = (operand / result);
     }
     return val;
