@@ -9,6 +9,22 @@ public class CalcController {
   private CalcModel model;
   private GuiView view;
   private boolean isInfix;
+  private static CalcController controller_instance = null;
+
+  /**
+   * A single point of access for the controller. The controller cannot be instantiated outside this
+   * class.
+   *
+   * @return returns the instance of the controller
+   * @throws InvalidExpressionException exception thrown by the model
+   */
+  public static CalcController getInstance(CalcModel model, ViewInterface view2)
+      throws InvalidExpressionException {
+    if (controller_instance == null) {
+      controller_instance = new CalcController(model, view2);
+    }
+    return controller_instance;
+  }
 
   /**
    * Is notified when a change in the expression type is indicated.
@@ -30,17 +46,20 @@ public class CalcController {
       result = model.evaluate(expression);
     } catch (InvalidExpressionException e) {
       String msg = "Invalid mathematical expression." + System.lineSeparator()
-          + "Please refer back to the informations section.";
+          + "Check each operand and operator is space separated" + System.lineSeparator()
+          + "and your expression is in the correct format.";
       view.setErrorMessage(msg);
+    } catch (ArithmeticException i) {
+      view.setErrorMessage("Cannot divide by 0");
     }
     view.setAnswer(String.valueOf(result));
   }
 
-  CalcController(CalcModel model, GuiView view) throws InvalidExpressionException {
+  private CalcController(CalcModel model, ViewInterface view2) throws InvalidExpressionException {
     this.model = model;
-    this.view = view;
+    this.view = (GuiView) view2;
 
-    view.addCalcObserver(this::calculate);
-    view.addTypeObserver(this::expressionType);
+    view2.addCalcObserver(this::calculate);
+    view2.addTypeObserver(this::expressionType);
   }
 }

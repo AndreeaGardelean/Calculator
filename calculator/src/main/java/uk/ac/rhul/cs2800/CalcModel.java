@@ -8,7 +8,7 @@ package uk.ac.rhul.cs2800;
 public class CalcModel {
   private static RevPolishCalc revPolishCalc;
   private static StandardCalc standard;
-  Calculator currentEvaluator = revPolishCalc;
+  private Calculator currentEvaluator;
   private float result = 0;
 
   /**

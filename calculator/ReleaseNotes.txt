@@ -1,5 +1,5 @@
 Release notes - 03/12/2022
-Version: v-1.2
+Version: v1.2
 
 New:
  -> error message displayed when user enters an incorrect mathematical expression
@@ -7,9 +7,20 @@ New:
 
 
 Release notes - 03/12/2022
-Version: v-1.3
+Version: v1.3
 Fixed:
 --> The calculator Infix mode can now evaluate expressions which contain parenthesis
---> The Infix calculator mode throws an error if the user wants to convert a reverse polish notation expression while the state of the calculator is Infix
+--> The Infix calculator mode throws an error if the user wants to convert a reverse polish 
+notation expression while the state of the calculator is Infix
 
+Release notes - 06/12/2022
+Version: v1.4
+Fixed:
+--> The calculator accepts expressions where the characters are separated by more than one 
+white space 
  
+ Release notes- 07/12/2022
+ Version: v1.4
+ Fixed:
+ --> Error message for an invalid mathematical expression has been improved
+ --> A different error message is displayed when division by 0 is done

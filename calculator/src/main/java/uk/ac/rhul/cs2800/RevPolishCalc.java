@@ -45,7 +45,11 @@ public class RevPolishCalc extends CheckElement implements Calculator {
           } else if (expressionValues[n].equals("*")) {
             result = operands.pop() * result;
           } else if (expressionValues[n].equals("/")) {
+            if (result == 0) {
+              throw new ArithmeticException();
+            }
             result = operands.pop() / result;
+
           }
           operands.push(result);
         } catch (BadTypeException e) {
