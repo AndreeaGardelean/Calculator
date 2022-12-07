@@ -15,7 +15,7 @@ public class MainView {
    * @throws InvalidExpressionException exception thrown by the CalcModel
    */
   public static void main(String[] args) throws InvalidExpressionException {
-    GuiView view = new GuiView();
+    ViewInterface view = new AsciiView();
     CalcModel model = new CalcModel();
 
     if (System.console() == null) {

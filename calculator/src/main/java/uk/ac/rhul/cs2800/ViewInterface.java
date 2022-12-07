@@ -36,9 +36,8 @@ public interface ViewInterface {
    */
   public void addTypeObserver(Observer t);
 
-
   /**
-   * Text based menu, displays all possible choices.
+   * Used to represent an ASCII menu on the command line.
    */
   public void menu();
 }

@@ -5,12 +5,11 @@ package uk.ac.rhul.cs2800;
  *
  * @author zjac013
  */
-
 public class CalcController {
   private CalcModel model;
   private GuiView view;
   private boolean isInfix;
-  private static CalcController calc_instance = null;
+  private static CalcController controller_instance = null;
 
   /**
    * A single point of access for the controller. The controller cannot be instantiated outside this
@@ -19,12 +18,12 @@ public class CalcController {
    * @return returns the instance of the controller
    * @throws InvalidExpressionException exception thrown by the model
    */
-  public static CalcController getInstance(CalcModel model, GuiView view2)
+  public static CalcController getInstance(CalcModel model, ViewInterface view2)
       throws InvalidExpressionException {
-    if (calc_instance == null) {
-      calc_instance = new CalcController(model, view2);
+    if (controller_instance == null) {
+      controller_instance = new CalcController(model, view2);
     }
-    return calc_instance;
+    return controller_instance;
   }
 
   /**
@@ -50,8 +49,11 @@ public class CalcController {
       result = model.evaluate(expression);
     } catch (InvalidExpressionException e) {
       String msg = "Invalid mathematical expression." + System.lineSeparator()
-          + "Make sure each value in your expression is space separated";
+          + "Check each operand and operator is space separated" + System.lineSeparator()
+          + "and your expression is in the correct format.";
       view.setErrorMessage(msg);
+    } catch (ArithmeticException i) {
+      view.setErrorMessage("Cannot divide by 0");
     }
     view.setAnswer(String.valueOf(result));
   }
@@ -64,11 +66,11 @@ public class CalcController {
    * @param view2 graphical user interface objects on which the changes will be observed
    * @throws InvalidExpressionException method is thrown by the model
    */
-  private CalcController(CalcModel model, GuiView view2) throws InvalidExpressionException {
+  private CalcController(CalcModel model, ViewInterface view2) throws InvalidExpressionException {
     this.model = model;
-    this.view = view2;
+    this.view = (GuiView) view2;
 
-    view.addCalcObserver(this::calculate);
-    view.addTypeObserver(this::expressionType);
+    view2.addCalcObserver(this::calculate);
+    view2.addTypeObserver(this::expressionType);
   }
 }
