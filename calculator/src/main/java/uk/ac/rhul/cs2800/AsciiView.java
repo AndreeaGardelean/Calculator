@@ -3,8 +3,8 @@ package uk.ac.rhul.cs2800;
 import java.util.Scanner;
 
 /**
- * Character menu view, works the same way as a graphical user interface but the user does to
- * interact with the buttons but with the keyboard.
+ * Character based menu view, works the same way as a graphical user interface but the user does to
+ * interact with the buttons but with the keyboard and standard output.
  *
  * @author zjac013
  */
@@ -12,14 +12,15 @@ public class AsciiView implements ViewInterface {
 
   private String expression;
 
-  Observer calc = null;
-  Observer type = null;
+  private Observer calc = null;
+  private Observer type = null;
 
   /**
    * This is an ASCII menu, is an application menu which does not use user graphical interface but
    * it still communicates with the user. Based on what key the user presses the observer will be
    * notified.
    */
+  @Override
   public void menu() {
     Scanner scan = new Scanner(System.in);
     boolean done = false;
@@ -56,6 +57,9 @@ public class AsciiView implements ViewInterface {
     scan.close();
   }
 
+  /**
+   * View menu with all possible actions that can be taken.
+   */
   private void help() {
     System.out.println("Choose one of the following:");
     System.out.println("? - set expression");
@@ -70,17 +74,17 @@ public class AsciiView implements ViewInterface {
   }
 
   @Override
-  public void setAnswer(String str) {
+  public void setAnswer(String ans) {
     System.out.println("The answer is being calculated");
   }
 
   @Override
-  public void addCalcObserver(Observer f) {
-    calc = f;
+  public void addCalcObserver(Observer c) {
+    calc = c;
   }
 
   @Override
-  public void addTypeObserver(Observer l) {
-    type = l;
+  public void addTypeObserver(Observer t) {
+    type = t;
   }
 }

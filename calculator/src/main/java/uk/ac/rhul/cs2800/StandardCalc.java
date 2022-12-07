@@ -23,7 +23,7 @@ public class StandardCalc implements Calculator {
 
   @Override
   public float evaluate(String expression) throws InvalidExpressionException {
-    String[] vals = expression.split(" ");
+    String[] vals = expression.split("\\s+");
     String rpExpr = "";
 
     for (int i = 0; i < vals.length; i++) {
