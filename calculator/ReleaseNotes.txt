@@ -18,12 +18,12 @@ Fixed:
 white space 
  
  Release notes - 07/12/2022
- Version: v1.4
+ Version: v1.5
  Fixed:
  --> Error message for an invalid mathematical expression has been improved
  --> A different error message is displayed when division by 0 is done
  
  Release notes - 07/12/2022
- Version v1.5
+ Version v1.6
  Fixed:
  --> An ASCII view will be displayed if the program is run from the terminal
