@@ -15,11 +15,7 @@ public class AsciiView implements ViewInterface {
   Observer calc = null;
   Observer type = null;
 
-  /**
-   * This is an ASCII menu, is an application menu which does not use user graphical interface but
-   * it still communicates with the user. Based on what key the user presses the observer will be
-   * notified.
-   */
+  @Override
   public void menu() {
     Scanner scan = new Scanner(System.in);
     boolean done = false;

@@ -1,10 +1,8 @@
 Release notes - 03/12/2022
 Version: v1.2
-
 New:
  -> error message displayed when user enters an incorrect mathematical expression
  -> error message disappears after a correct expression has been entered 
-
 
 Release notes - 03/12/2022
 Version: v1.3
@@ -19,8 +17,13 @@ Fixed:
 --> The calculator accepts expressions where the characters are separated by more than one 
 white space 
  
- Release notes- 07/12/2022
+ Release notes - 07/12/2022
  Version: v1.4
  Fixed:
  --> Error message for an invalid mathematical expression has been improved
  --> A different error message is displayed when division by 0 is done
+ 
+ Release notes - 07/12/2022
+ Version v1.5
+ Fixed:
+ --> An ASCII view will be displayed if the program is run from the terminal

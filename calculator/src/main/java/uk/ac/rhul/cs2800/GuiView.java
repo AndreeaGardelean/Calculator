@@ -1,7 +1,6 @@
 package uk.ac.rhul.cs2800;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -111,10 +110,7 @@ public class GuiView extends Application implements ViewInterface {
   }
 
   // --------------------------------------------------------
-
-  /**
-   * The user interface will be started only after the controller is ready to run.
-   */
+  @Override
   public void menu() {
     calculate.setDisable(false);
     infix.setDisable(false);

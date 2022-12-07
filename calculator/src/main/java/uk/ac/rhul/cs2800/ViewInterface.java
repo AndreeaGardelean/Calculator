@@ -34,4 +34,9 @@ public interface ViewInterface {
    * @param l the observer which notifies about a change in expression type
    */
   public void addTypeObserver(Observer l);
+  
+  /**
+   * Used to represent an ASCII menu on the command line.
+   */
+  public void menu();
 }
