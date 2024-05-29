@@ -1,2 +1,1 @@
-This is a calculator created with JavaFX, employing designed patterns to achieve a well designed and organised code.
-The calculator is able to calculate mathematical expression in both infix and prefix notation.
+Introducing a meticulously crafted calculator developed using Java and JavaFX. Leveraging sophisticated design patterns, the code is meticulously organized for optimal performance. Through thorough analysis, eliminated code smells and incorporated best software engineering practices. This calculator excels at computing mathematical expressions in both infix and prefix notations.
